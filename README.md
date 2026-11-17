@@ -9,6 +9,7 @@ main.js             → menú, chat animado del hero y formulario de contacto
 favicon.png         → ícono de la pestaña
 apple-touch-icon.png
 og-image.png        → imagen al compartir el link (1200×630)
+osvaldo.jpg         → tu foto (sección Osvaldo)
 ```
 
 ## Publicar en GitHub + Vercel
@@ -23,5 +24,4 @@ Usa FormSubmit y envía a osvaldo.hernandez.o@gmail.com.
 - Después de activarlo, FormSubmit entrega un código aleatorio. Reemplaza el correo en el `action` del `<form>` de `index.html` por ese código para no exponer tu email.
 
 ## Pendientes
-- Foto de Osvaldo (buscar `[Tu foto, 1:1]` en index.html).
 - Logos de clientes (hoy son nombres en texto).

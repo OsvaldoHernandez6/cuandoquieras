@@ -33,7 +33,7 @@ a{color:#0B0B0C}a:hover{color:#3A3A37}
 .cq-sonar2{animation:cqsonar 3s ease-out 1s infinite}
 .cq-sonar3{animation:cqsonar 3s ease-out 2s infinite}
 .cq-sweep{animation:cqsweep 3.6s linear infinite}
-.cq-marquee{animation:cqmarquee 36s linear infinite}
+.cq-marquee{animation:cqmarquee 60s linear infinite}
 .cq-draw{stroke-dasharray:320;animation:cqdraw 4s ease-out infinite}
 .cq-dot1{animation:cqblink 1.2s infinite}
 .cq-dot2{animation:cqblink 1.2s .2s infinite}
@@ -42,6 +42,7 @@ a{color:#0B0B0C}a:hover{color:#3A3A37}
 .cq-breath{animation:cqbreath 6s ease-in-out infinite}
 .cq-btn{cursor:pointer;transition:background .15s,color .15s,transform .15s}
 .cq-btn:hover{transform:translate(-2px,-2px)}
+.cq-svc{transition:opacity .2s}.cq-svc:hover{opacity:1!important}
 .cq-row{transition:background .2s,color .2s}
 .cq-row:hover{background:#0B0B0C;color:#F3F3EF}
 .cq-row:hover .cq-muted{color:#C9C9C4}
@@ -132,43 +133,20 @@ WhatsApp
 <section id="hacemos" style="border-bottom: 2px solid #0B0B0C">
 <div style="max-width: 1360px; margin: 0 auto; padding: 120px 24px 0; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: flex-end; justify-content: space-between">
 <h2 style="margin: 0; flex: 999 1 640px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(44px, 6.6vw, 104px); line-height: 0.94; letter-spacing: -0.055em">Hacemos que tu negocio tenga <span style="background: #00E07A; padding: 0 0.12em">coherencia</span> y crecimiento.</h2>
-<span style="flex: 0 0 auto; font-family: 'JetBrains Mono', monospace; font-size: 14px; padding-bottom: 12px">(05 especialidades)</span>
+<span style="flex: 0 0 auto; font-family: 'JetBrains Mono', monospace; font-size: 14px; padding-bottom: 12px">(05 especialidades · elige una)</span>
 </div>
-<div style="margin-top: 72px; border-top: 2px solid #0B0B0C">
-<div class="cq-row" style="border-bottom: 1px solid #0B0B0C">
-<div style="max-width: 1360px; margin: 0 auto; padding: 36px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px 48px; align-items: baseline">
-<span style="flex: 0 0 64px; font-family: 'JetBrains Mono', monospace; font-size: 15px">01</span>
-<h3 style="margin: 0; flex: 1 1 340px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(48px, 6.4vw, 96px); line-height: 0.9; letter-spacing: -0.06em">Marca</h3>
-<p class="cq-muted" style="margin: 0; flex: 1 1 360px; font-size: 18px; line-height: 1.55; color: #3A3A37">Estrategia de marca, estrategia de contenidos y social media.</p>
+<div style="max-width: 1360px; margin: 72px auto 0; padding: 0 24px 120px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 48px; align-items: stretch">
+<div style="flex: 1 1 480px; min-width: 0; border-top: 2px solid #0B0B0C" role="group" aria-label="Especialidades">
+<button type="button" class="cq-svc" data-svc="0" aria-pressed="true" style="display: flex; align-items: center; gap: 20px; width: 100%; padding: 22px 0; border: 0; border-bottom: 1px solid #0B0B0C; background: transparent; color: #0B0B0C; text-align: left; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(40px, 5.4vw, 80px); line-height: 0.95; letter-spacing: -0.055em; opacity: 1"><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0; width: 28px; flex-shrink: 0">01</span>Marca<span class="cq-svc-dot" style="margin-left: auto; width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; background: #00E07A"></span></button>
+<button type="button" class="cq-svc" data-svc="1" aria-pressed="false" style="display: flex; align-items: center; gap: 20px; width: 100%; padding: 22px 0; border: 0; border-bottom: 1px solid #0B0B0C; background: transparent; color: #0B0B0C; text-align: left; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(40px, 5.4vw, 80px); line-height: 0.95; letter-spacing: -0.055em; opacity: 0.45"><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0; width: 28px; flex-shrink: 0">02</span>Performance<span class="cq-svc-dot" style="margin-left: auto; width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; background: transparent"></span></button>
+<button type="button" class="cq-svc" data-svc="2" aria-pressed="false" style="display: flex; align-items: center; gap: 20px; width: 100%; padding: 22px 0; border: 0; border-bottom: 1px solid #0B0B0C; background: transparent; color: #0B0B0C; text-align: left; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(40px, 5.4vw, 80px); line-height: 0.95; letter-spacing: -0.055em; opacity: 0.45"><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0; width: 28px; flex-shrink: 0">03</span>E-commerce<span class="cq-svc-dot" style="margin-left: auto; width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; background: transparent"></span></button>
+<button type="button" class="cq-svc" data-svc="3" aria-pressed="false" style="display: flex; align-items: center; gap: 20px; width: 100%; padding: 22px 0; border: 0; border-bottom: 1px solid #0B0B0C; background: transparent; color: #0B0B0C; text-align: left; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(40px, 5.4vw, 80px); line-height: 0.95; letter-spacing: -0.055em; opacity: 0.45"><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0; width: 28px; flex-shrink: 0">04</span>Auditoría<span class="cq-svc-dot" style="margin-left: auto; width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; background: transparent"></span></button>
+<button type="button" class="cq-svc" data-svc="4" aria-pressed="false" style="display: flex; align-items: center; gap: 20px; width: 100%; padding: 22px 0; border: 0; border-bottom: 1px solid #0B0B0C; background: transparent; color: #0B0B0C; text-align: left; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(40px, 5.4vw, 80px); line-height: 0.95; letter-spacing: -0.055em; opacity: 0.45"><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0; width: 28px; flex-shrink: 0">05</span>Clases<span class="cq-svc-dot" style="margin-left: auto; width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; background: transparent"></span></button>
 </div>
-</div>
-<div class="cq-row" style="border-bottom: 1px solid #0B0B0C">
-<div style="max-width: 1360px; margin: 0 auto; padding: 36px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px 48px; align-items: baseline">
-<span style="flex: 0 0 64px; font-family: 'JetBrains Mono', monospace; font-size: 15px">02</span>
-<h3 style="margin: 0; flex: 1 1 340px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(48px, 6.4vw, 96px); line-height: 0.9; letter-spacing: -0.06em">Performance</h3>
-<p class="cq-muted" style="margin: 0; flex: 1 1 360px; font-size: 18px; line-height: 1.55; color: #3A3A37">Pauta full funnel en Meta, Google, TikTok y Pinterest. Diseño de anuncios para generar venta. Métricas con GA4, GTM, Clarity y más.</p>
-</div>
-</div>
-<div class="cq-row" style="border-bottom: 1px solid #0B0B0C">
-<div style="max-width: 1360px; margin: 0 auto; padding: 36px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px 48px; align-items: baseline">
-<span style="flex: 0 0 64px; font-family: 'JetBrains Mono', monospace; font-size: 15px">03</span>
-<h3 style="margin: 0; flex: 1 1 340px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(48px, 6.4vw, 96px); line-height: 0.9; letter-spacing: -0.06em">E-commerce</h3>
-<p class="cq-muted" style="margin: 0; flex: 1 1 360px; font-size: 18px; line-height: 1.55; color: #3A3A37">Creación de tiendas, mailing, descuentos y promociones que mueven la venta.</p>
-</div>
-</div>
-<div class="cq-row" style="border-bottom: 1px solid #0B0B0C">
-<div style="max-width: 1360px; margin: 0 auto; padding: 36px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px 48px; align-items: baseline">
-<span style="flex: 0 0 64px; font-family: 'JetBrains Mono', monospace; font-size: 15px">04</span>
-<h3 style="margin: 0; flex: 1 1 340px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(48px, 6.4vw, 96px); line-height: 0.9; letter-spacing: -0.06em">Auditoría</h3>
-<p class="cq-muted" style="margin: 0; flex: 1 1 360px; font-size: 18px; line-height: 1.55; color: #3A3A37">Te ayudamos en tu operación de marketing: revisamos todo lo que haces y encontramos mejoras, oportunidades y hallazgos.</p>
-</div>
-</div>
-<div class="cq-row">
-<div style="max-width: 1360px; margin: 0 auto; padding: 36px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px 48px; align-items: baseline">
-<span style="flex: 0 0 64px; font-family: 'JetBrains Mono', monospace; font-size: 15px">05</span>
-<h3 style="margin: 0; flex: 1 1 340px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(48px, 6.4vw, 96px); line-height: 0.9; letter-spacing: -0.06em">Clases</h3>
-<p class="cq-muted" style="margin: 0; flex: 1 1 360px; font-size: 18px; line-height: 1.55; color: #3A3A37">Clases a la medida de performance (Meta Ads), marcajes, estrategia y más.</p>
-</div>
+<div aria-live="polite" style="flex: 1 1 420px; min-width: 0; background: #00E07A; border: 2px solid #0B0B0C; box-shadow: 10px 10px 0 #0B0B0C; padding: clamp(28px, 4vw, 56px); display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-height: 420px">
+<div style="display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 14px"><span id="cq-svc-name">Marca</span><span><span id="cq-svc-n">01</span> / 05</span></div>
+<p id="cq-svc-bajada" class="cq-msg" style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(32px, 3.6vw, 52px); line-height: 1.02; letter-spacing: -0.045em">Creamos tu marca y cómo se comportará.</p>
+<p id="cq-svc-detalle" style="margin: 0; font-size: 18px; line-height: 1.55; max-width: 520px; border-top: 2px solid #0B0B0C; padding-top: 20px">Estrategia de marca, estrategia de contenidos y social media.</p>
 </div>
 </div>
 </section>
@@ -260,20 +238,22 @@ WhatsApp
 <div style="max-width: 1360px; width: 100%; margin: 0 auto; padding: 0 24px; box-sizing: border-box">
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px">Marcas que conversan con nosotros</span>
 </div>
-<div style="overflow: hidden" role="img" aria-label="Clientes: Victoria Raveau, Cosycat, ozCoffee">
+<div style="overflow: hidden" role="img" aria-label="Clientes: Victoria Raveau, Cosycat, ozCoffee, Umatu, Refugios Suri, BSummer, Agencias de publicidad">
 <div class="cq-marquee" style="display: flex; width: max-content; align-items: center; gap: 0; white-space: nowrap">
 <span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 48px; letter-spacing: -0.03em">Victoria Raveau</span>
 <span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 48px; letter-spacing: -0.04em">Cosycat</span>
 <span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em">ozCoffee</span>
+<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 48px; letter-spacing: -0.04em">Umatu</span>
+<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 48px; letter-spacing: -0.03em">Refugios Suri</span>
+<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em">BSummer</span>
+<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 48px; letter-spacing: -0.03em">Agencias de publicidad</span>
 <span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 48px; letter-spacing: -0.03em">Victoria Raveau</span>
 <span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 48px; letter-spacing: -0.04em">Cosycat</span>
 <span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em">ozCoffee</span>
-<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 48px; letter-spacing: -0.03em">Victoria Raveau</span>
-<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 48px; letter-spacing: -0.04em">Cosycat</span>
-<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em">ozCoffee</span>
-<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 48px; letter-spacing: -0.03em">Victoria Raveau</span>
-<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 48px; letter-spacing: -0.04em">Cosycat</span>
-<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em">ozCoffee</span>
+<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 48px; letter-spacing: -0.04em">Umatu</span>
+<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 48px; letter-spacing: -0.03em">Refugios Suri</span>
+<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em">BSummer</span>
+<span style="padding: 0 64px; border-right: 2px solid #0B0B0C; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 48px; letter-spacing: -0.03em">Agencias de publicidad</span>
 </div>
 </div>
 </section>
@@ -281,8 +261,18 @@ WhatsApp
 <section id="osvaldo" style="border-bottom: 2px solid #0B0B0C">
 <div style="max-width: 1360px; margin: 0 auto; padding: 120px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 64px">
 <div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-end">
-<div style="flex: 0 1 380px; min-width: 260px; aspect-ratio: 1 / 1; background: #E2E2DC; border: 2px solid #0B0B0C; box-shadow: 10px 10px 0 #00E07A; display: flex; align-items: center; justify-content: center; position: relative">
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #3A3A37">[Tu foto, 1:1]</span>
+<div style="flex: 0 1 380px; min-width: 260px; position: relative">
+<div style="aspect-ratio: 1 / 1; border: 2px solid #0B0B0C; box-shadow: 10px 10px 0 #00E07A; overflow: hidden; background: #E2E2DC">
+<img src="osvaldo.jpg" alt="Osvaldo Hernández, fundador de cuando quieras" width="400" height="400" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.05)">
+</div>
+<span style="position: absolute; top: 14px; left: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; background: #0B0B0C; color: #F3F3EF; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em">
+<span style="position: relative; width: 8px; height: 8px"><span class="cq-ping" style="position: absolute; inset: 0; border-radius: 50%; background: #00E07A"></span><span style="position: absolute; inset: 0; border-radius: 50%; background: #00E07A"></span></span>EN LÍNEA</span>
+<span style="position: absolute; top: -16px; right: -16px; width: 36px; height: 36px" aria-hidden="true"><span class="cq-ping" style="position: absolute; inset: 0; border-radius: 50%; background: #00E07A"></span><span style="position: absolute; inset: 0; border-radius: 50%; background: #00E07A; border: 5px solid #F3F3EF; box-sizing: border-box"></span></span>
+<div style="position: absolute; left: 14px; bottom: 22px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start">
+<span style="background: #2A2A2C; color: #E4E4DF; padding: 9px 13px; font-size: 14px">¿Hablamos?</span>
+<span style="background: #F3F3EF; color: #0B0B0C; border: 2px solid #0B0B0C; padding: 8px 12px; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px">Cuando quieras.
+<svg width="16" height="11" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M1 6.5L4.5 10L11 2" stroke="#00A85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 6.5L10.5 10L17 2" stroke="#00A85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+</div>
 </div>
 <div style="flex: 999 1 480px; display: flex; flex-direction: column; gap: 22px">
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px">Fundador</span>

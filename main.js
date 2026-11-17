@@ -113,3 +113,34 @@
     });
   }
 })();
+
+/* ---------- Selector de especialidades ---------- */
+(function () {
+  var SV = [
+    ['Marca', 'Creamos tu marca y cómo se comportará.', 'Estrategia de marca, estrategia de contenidos y social media.'],
+    ['Performance', 'Te ayudamos a cumplir tus objetivos con performance.', 'Pauta full funnel en Meta, Google, TikTok y Pinterest. Diseño de anuncios para generar venta. Métricas con GA4, GTM, Clarity y más.'],
+    ['E-commerce', 'Gestionamos y potenciamos tu tienda online.', 'Creación de tiendas, mailing, descuentos y promociones que mueven la venta.'],
+    ['Auditoría', 'Analizamos tu negocio, tu marca y por dónde puede crecer, con una auditoría.', 'Te ayudamos en tu operación de marketing: revisamos todo lo que haces y encontramos mejoras, oportunidades y hallazgos.'],
+    ['Clases', 'Enseñamos a todos quienes quieran potenciar sus negocios o carreras.', 'Clases a la medida de performance (Meta Ads), marcajes, estrategia y más.']
+  ];
+  var btns = document.querySelectorAll('[data-svc]');
+  var nEl = document.getElementById('cq-svc-n'), nameEl = document.getElementById('cq-svc-name');
+  var bEl = document.getElementById('cq-svc-bajada'), dEl = document.getElementById('cq-svc-detalle');
+  function pick(i) {
+    btns.forEach(function (b, k) {
+      var on = k === i;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.style.opacity = on ? '1' : '0.45';
+      var dot = b.querySelector('.cq-svc-dot');
+      if (dot) dot.style.background = on ? '#00E07A' : 'transparent';
+    });
+    nEl.textContent = '0' + (i + 1);
+    nameEl.textContent = SV[i][0];
+    dEl.textContent = SV[i][2];
+    bEl.textContent = SV[i][1];
+    bEl.classList.remove('cq-msg'); void bEl.offsetWidth; bEl.classList.add('cq-msg');
+  }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () { pick(+b.getAttribute('data-svc')); });
+  });
+})();
