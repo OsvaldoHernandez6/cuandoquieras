@@ -1,6 +1,20 @@
 (function () {
   'use strict';
 
+  /* ---------- Medición: GTM (dataLayer) + Meta Pixel ---------- */
+  function track(gaEvent, fbEvent, params) {
+    try { window.dataLayer = window.dataLayer || []; window.dataLayer.push(Object.assign({ event: gaEvent }, params || {})); } catch (e) {}
+    try { if (window.fbq && fbEvent) window.fbq('track', fbEvent, params || {}); } catch (e) {}
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('wa.me') > -1) track('whatsapp_click', 'Contact', { ubicacion: 'boton_flotante' });
+    else if (href.indexOf('ejemplo-ecosistema') > -1) track('ver_ejemplo', null, { herramienta: 'monitor' });
+    else if (href.indexOf('radarejemplo') > -1) track('ver_ejemplo', null, { herramienta: 'radar' });
+  });
+
   /* ---------- Menú hamburguesa ---------- */
   var menu = document.getElementById('cq-menu');
   function setMenu(open) {
@@ -26,7 +40,7 @@
   var status = document.getElementById('cq-status');
   var lines = [
     { me: true, text: '¿Me pueden mandar el reporte?' },
-    { me: false, text: 'Ya está en tu Monitor. En vivo.' },
+    { me: false, text: 'Ya lo tienes en vivo, cuando quieras.' },
     { me: true, text: '¿Y si quiero cambiar la campaña?' },
     { me: false, text: 'La revisamos hoy mismo.' },
     { me: true, text: '¿Cuándo hablamos?' },
@@ -106,9 +120,10 @@
         if (!r.ok) throw new Error('send');
         form.hidden = true;
         if (sent) sent.hidden = false;
+        track('generate_lead', 'Lead', { form: 'contacto', tema: data.tema || '' });
       }).catch(function () {
         if (failed) failed.hidden = false;
-        if (btn) { btn.disabled = false; btn.textContent = 'Enviar, cuando quieras →'; }
+        if (btn) { btn.disabled = false; btn.textContent = 'Agendar mi reunión →'; }
       });
     });
   }
