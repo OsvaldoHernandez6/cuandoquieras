@@ -15,6 +15,7 @@ Sitio estático (HTML + CSS + JS, sin build). Se despliega en Vercel con `cleanU
 `styles.css` tiene todo el diseño y `main.js` la medición, las animaciones y el formulario.
 
 ## Formulario de inscripción
+- Está en el hero de cada landing (curso fijo), al final del home (con selector de curso) y en /inscripcion.
 - Usa FormSubmit y llega a osvaldo.hernandez.o@gmail.com. El asunto dice si es "Inscripción" o "Lista de espera" y el curso.
 - El primer envío desde el sitio publicado manda un correo de activación: hay que confirmarlo una vez.
 - `?curso=` preselecciona el curso (meta-ads, estrategia-de-contenidos, google-analytics, google-tag-manager).

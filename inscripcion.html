@@ -63,7 +63,7 @@ fbq('track', 'PageView');
 <main class="ins">
 <div class="ins-l" id="ins-l">
 <span class="ghost-n" id="ins-n" aria-hidden="true">01</span>
-<a href="/meta-ads" id="ins-back" class="mono" style="position:relative;z-index:1;text-decoration:none">← Volver al curso</a>
+<a href="/meta-ads" id="ins-back" class="mono">← Volver al curso</a>
 <h1 class="display" id="ins-h1">Inscríbete en <em id="ins-title" style="font-weight:500">Meta Ads.</em></h1>
 <p id="ins-p">Completa tus datos y te confirmamos por WhatsApp la fecha, el horario, el valor y tu cupo. Respondemos en menos de 24 h.</p>
 <ul>
@@ -73,31 +73,29 @@ fbq('track', 'PageView');
 </ul>
 </div>
 <div class="ins-r">
-<form id="ins-form" class="form" action="https://formsubmit.co/osvaldo.hernandez.o@gmail.com" method="POST" novalidate>
-<div class="field full"><label for="f-curso">Curso</label><select id="f-curso" class="in" name="curso"><option value="meta-ads">Meta Ads</option><option value="estrategia-de-contenidos">Estrategia de contenidos (lista de espera)</option><option value="google-analytics">Google Analytics 4 (lista de espera)</option><option value="google-tag-manager">Google Tag Manager con Claude (lista de espera)</option></select></div>
-<div class="field"><label for="f-nombre">Tu nombre</label><input id="f-nombre" class="in" type="text" name="nombre" autocomplete="name" required></div>
-<div class="field"><label for="f-wa">WhatsApp</label><input id="f-wa" class="in" type="tel" name="whatsapp" autocomplete="tel" placeholder="+56 9" required></div>
-<div class="field full"><label for="f-email">Correo</label><input id="f-email" class="in" type="email" name="email" autocomplete="email" required></div>
-<fieldset class="field full"><legend>¿Cuánto sabes del tema?</legend>
-<div class="chips">
-<label><input type="radio" name="nivel" value="Parto de cero" checked><span>Parto de cero</span></label>
-<label><input type="radio" name="nivel" value="Algo he probado"><span>Algo he probado</span></label>
-<label><input type="radio" name="nivel" value="Ya tengo experiencia"><span>Ya tengo experiencia</span></label>
-</div></fieldset>
-<div class="field full"><label for="f-msg">¿Qué te gustaría lograr? (opcional)</label><textarea id="f-msg" class="in" name="objetivo" rows="2" style="resize:vertical"></textarea></div>
-<input type="hidden" name="tipo" id="f-tipo" value="Inscripción">
-<input type="hidden" name="_subject" id="f-subject" value="Inscripción: Meta Ads — cuando quieras">
+<div class="fcard" id="inscribete">
+<div class="fcard-h"><b>Tus datos</b><span>Te respondemos en menos de 24 h por WhatsApp.</span></div>
+<form class="form js-ins" action="https://formsubmit.co/osvaldo.hernandez.o@gmail.com" method="POST" novalidate>
+<div class="field full"><label for="i-curso">Curso</label><select id="i-curso" class="in" name="curso_slug"><option value="meta-ads">Meta Ads</option><option value="estrategia-de-contenidos">Estrategia de contenidos (lista de espera)</option><option value="google-analytics">Google Analytics 4 (lista de espera)</option><option value="google-tag-manager">Google Tag Manager con Claude (lista de espera)</option></select></div>
+<div class="field"><label for="i-nombre">Tu nombre</label><input id="i-nombre" class="in" type="text" name="nombre" autocomplete="name" required></div>
+<div class="field"><label for="i-wa">WhatsApp</label><input id="i-wa" class="in" type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="+56 9" required></div>
+<div class="field full"><label for="i-email">Correo</label><input id="i-email" class="in" type="email" name="email" autocomplete="email" inputmode="email" required></div>
+<fieldset class="field full"><legend>¿Cuánto sabes del tema?</legend><div class="chips"><label><input type="radio" name="nivel" value="Parto de cero" checked><span>Parto de cero</span></label><label><input type="radio" name="nivel" value="Algo he probado"><span>Algo he probado</span></label><label><input type="radio" name="nivel" value="Ya tengo experiencia"><span>Ya tengo experiencia</span></label></div></fieldset>
+<div class="field full"><label for="i-obj">¿Qué te gustaría lograr? (opcional)</label><textarea id="i-obj" class="in" name="objetivo" rows="1"></textarea></div>
+<input type="hidden" name="tipo" value="Inscripción">
+<input type="hidden" name="_subject" value="Inscripción — cuando quieras">
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_template" value="table">
-<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-<p class="err" id="ins-err" hidden></p>
-<div class="form-end"><small>Respondemos en persona, no con un bot.</small><button type="submit" class="btn btn-ink" id="ins-send">Enviar inscripción →</button></div>
+<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+<p class="err" role="alert" hidden></p>
+<div class="form-end"><small>Respondemos en persona, no con un bot.</small><button type="submit" class="btn btn-ink">Enviar inscripción →</button></div>
 </form>
-<div class="done" id="ins-done" hidden>
+<div class="done" hidden>
 <span class="mono">Recibido ✓</span>
-<h2 class="display" id="done-h">¡Listo!</h2>
-<p id="done-p">Te escribimos por WhatsApp en menos de 24 h para confirmar tu cupo.</p>
-<div style="display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center"><a href="https://wa.me/56951179298" id="done-wa" target="_blank" rel="noopener" class="btn btn-ink" data-ubicacion="inscripcion_ok">Escribir ahora por WhatsApp</a><a href="/#cursos" class="link">Ver otros cursos</a></div>
+<h3 class="done-h">¡Listo!</h3>
+<p class="done-p">Te escribimos por WhatsApp en menos de 24 h.</p>
+<div class="done-actions"><a href="https://wa.me/56951179298" target="_blank" rel="noopener" class="btn btn-ink done-wa" data-ubicacion="inscripcion_ok">Escribir ahora por WhatsApp</a><a href="/#cursos" class="link">Ver otros cursos</a></div>
+</div>
 </div>
 </div>
 </main>

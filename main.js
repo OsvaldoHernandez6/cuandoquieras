@@ -7,6 +7,7 @@
     'google-analytics': { n: '03', title: 'Google Analytics 4', color: 'sun', open: false },
     'google-tag-manager': { n: '04', title: 'Google Tag Manager con Claude', color: 'lila', open: false }
   };
+  var WA = '56951179298';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Medición: GTM (dataLayer) + Meta Pixel ---------- */
@@ -23,11 +24,11 @@
     if (!a) return;
     var href = a.getAttribute('href') || '';
     if (href.indexOf('wa.me') > -1) track('whatsapp_click', 'Contact', { ubicacion: a.getAttribute('data-ubicacion') || 'otro', curso: pageCurso });
-    else if (href.indexOf('/inscripcion') === 0) track('click_inscribirme', null, { ubicacion: a.getAttribute('data-cta') || 'otro', curso: pageCurso });
+    else if (href === '#inscribete' || href.indexOf('/inscripcion') === 0) track('click_inscribirme', null, { ubicacion: a.getAttribute('data-cta') || 'otro', curso: pageCurso });
     else if (a.hasAttribute('data-curso')) track('click_curso', null, { curso: a.getAttribute('data-curso') });
   });
 
-  /* ---------- WhatsApp flotante: se muestra al pasar el hero ---------- */
+  /* ---------- WhatsApp flotante: aparece al pasar el hero ---------- */
   var wa = document.querySelector('.wa');
   var heroEl = document.querySelector('.hero, .lhero');
   if (wa && heroEl) {
@@ -52,7 +53,7 @@
     }, 2200);
   }
 
-  /* ---------- Clase en vivo: reloj y chat ---------- */
+  /* ---------- Videollamada: reloj y mensajes ---------- */
   var clock = document.getElementById('live-clock');
   if (clock && !reduce) {
     var t = 42 * 60 + 10;
@@ -62,38 +63,36 @@
       clock.textContent = [h, m, s].map(function (x) { return (x < 10 ? '0' : '') + x; }).join(':');
     }, 1000);
   }
-  var chat = document.getElementById('live-chat');
-  if (chat) {
+  var toast = document.getElementById('live-chat');
+  if (toast && !reduce) {
     var msgs = [
-      ['Camila', '¿Por qué me subió tanto el CPM?', false],
-      ['Osvaldo', 'Buena. Comparte pantalla y lo vemos en tu cuenta 👀', true],
-      ['Diego', '¡Ahora sí entendí la frecuencia!', false],
-      ['Osvaldo', 'Mañana publicamos la campaña en vivo 🚀', true]
+      ['Camila', '¿Por qué me subió el CPM?'],
+      ['Osvaldo', 'Mira la frecuencia: ahí está la respuesta 👀'],
+      ['Diego', '¡Ahora entendí el ROAS!'],
+      ['Fran', '¿Publicamos la campaña hoy?']
     ];
     var mi = 0;
-    var add = function () {
-      var m = msgs[mi % msgs.length];
-      var d = document.createElement('div');
-      d.className = 'bub' + (m[2] ? ' me' : '');
-      var b = document.createElement('b'); b.textContent = m[0];
-      d.appendChild(b); d.appendChild(document.createTextNode(m[1]));
-      chat.appendChild(d);
-      while (chat.children.length > 2) chat.removeChild(chat.firstChild);
-      mi++;
-    };
-    add(); add();
-    if (!reduce) setInterval(add, 2600);
+    setInterval(function () {
+      mi = (mi + 1) % msgs.length;
+      var d = toast.cloneNode(false);
+      var b = document.createElement('b'); b.textContent = msgs[mi][0];
+      d.appendChild(b); d.appendChild(document.createTextNode(msgs[mi][1]));
+      toast.parentNode.replaceChild(d, toast);
+      toast = d;
+    }, 3000);
   }
 
-  /* ---------- Inscripción ---------- */
-  var form = document.getElementById('ins-form');
-  if (!form) return;
-  var sel = document.getElementById('f-curso');
-  var start = new URLSearchParams(location.search).get('curso');
-  if (start && COURSES[start]) sel.value = start;
+  /* ---------- Formularios de inscripción ---------- */
+  var startCurso = new URLSearchParams(location.search).get('curso');
 
-  function paint() {
-    var c = COURSES[sel.value];
+  function cursoOf(form) {
+    var f = form.querySelector('[name="curso_slug"]');
+    return f && COURSES[f.value] ? f.value : 'meta-ads';
+  }
+
+  /* Página /inscripcion: el panel izquierdo toma el color y texto del curso */
+  function paintPage(slug) {
+    var c = COURSES[slug];
     document.body.className = 'c-' + c.color;
     document.getElementById('ins-n').textContent = c.n;
     document.getElementById('ins-title').textContent = c.title + '.';
@@ -101,50 +100,69 @@
     document.getElementById('ins-p').textContent = c.open
       ? 'Completa tus datos y te confirmamos por WhatsApp la fecha, el horario, el valor y tu cupo. Respondemos en menos de 24 h.'
       : 'Estamos preparando la primera edición. Déjanos tus datos y te avisamos primero cuando abran las inscripciones.';
-    document.getElementById('ins-back').href = '/' + sel.value;
-    document.getElementById('f-tipo').value = c.open ? 'Inscripción' : 'Lista de espera';
-    document.getElementById('f-subject').value = (c.open ? 'Inscripción: ' : 'Lista de espera: ') + c.title + ' — cuando quieras';
-    document.getElementById('ins-send').textContent = c.open ? 'Enviar inscripción →' : 'Unirme a la lista →';
+    document.getElementById('ins-back').href = '/' + slug;
   }
-  sel.addEventListener('change', paint);
-  paint();
 
-  var err = document.getElementById('ins-err');
-  var btn = document.getElementById('ins-send');
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (btn.disabled) return;
-    var bad = Array.prototype.filter.call(form.querySelectorAll('[required]'), function (f) { return !f.checkValidity(); });
-    if (bad.length) {
-      err.textContent = 'Revisa tu nombre, WhatsApp y correo para poder contactarte.';
-      err.hidden = false; bad[0].focus(); return;
+  function paintForm(form) {
+    var slug = cursoOf(form), c = COURSES[slug];
+    form.querySelector('[name="tipo"]').value = c.open ? 'Inscripción' : 'Lista de espera';
+    form.querySelector('[name="_subject"]').value = (c.open ? 'Inscripción: ' : 'Lista de espera: ') + c.title + ' — cuando quieras';
+    form.querySelector('button[type="submit"]').textContent = c.open ? 'Enviar inscripción →' : 'Unirme a la lista →';
+    if (document.getElementById('ins-l')) paintPage(slug);
+  }
+
+  document.querySelectorAll('form.js-ins').forEach(function (form) {
+    var sel = form.querySelector('select[name="curso_slug"]');
+    if (sel) {
+      if (startCurso && COURSES[startCurso]) sel.value = startCurso;
+      sel.addEventListener('change', function () { paintForm(form); });
     }
-    err.hidden = true;
-    var data = {};
-    new FormData(form).forEach(function (v, k) { data[k] = v; });
-    var c = COURSES[sel.value];
-    data.curso = c.title;
-    var label = btn.textContent;
-    btn.disabled = true; btn.textContent = 'Enviando…';
-    fetch(form.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
-    }).then(function (r) {
-      if (!r.ok) throw new Error('send');
-      form.hidden = true;
-      var first = (data.nombre || '').trim().split(' ')[0];
-      document.getElementById('done-h').textContent = '¡Listo' + (first ? ', ' + first : '') + '!';
-      document.getElementById('done-p').textContent = c.open
-        ? 'Recibimos tu inscripción a ' + c.title + '. Te escribimos por WhatsApp en menos de 24 h para confirmar fecha, horario, valor y tu cupo.'
-        : 'Quedaste en la lista de espera de ' + c.title + '. Te avisamos primero cuando abran las inscripciones.';
-      document.getElementById('done-wa').href = 'https://wa.me/56951179298?text=' + encodeURIComponent('Hola, soy ' + (data.nombre || '') + '. Acabo de inscribirme en ' + c.title);
-      document.getElementById('ins-done').hidden = false;
-      track('generate_lead', 'Lead', { form: 'inscripcion', curso: sel.value, tipo: data.tipo });
-    }).catch(function () {
-      err.textContent = 'No pudimos enviar el formulario. Escríbenos por WhatsApp al +56 9 5117 9298 o a osvaldo.hernandez.o@gmail.com.';
-      err.hidden = false;
-      btn.disabled = false; btn.textContent = label;
+    paintForm(form);
+
+    var card = form.closest('.fcard');
+    var err = form.querySelector('.err');
+    var btn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (btn.disabled) return;
+      var bad = Array.prototype.filter.call(form.querySelectorAll('[required]'), function (f) { return !f.checkValidity(); });
+      if (bad.length) {
+        err.textContent = 'Revisa tu nombre, WhatsApp y correo para poder contactarte.';
+        err.hidden = false; bad[0].focus(); return;
+      }
+      err.hidden = true;
+      var slug = cursoOf(form), c = COURSES[slug];
+      var data = {};
+      new FormData(form).forEach(function (v, k) { data[k] = v; });
+      delete data.curso_slug;
+      data.curso = c.title;
+      data.pagina = location.pathname;
+      var label = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      fetch(form.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('send');
+        var done = card.querySelector('.done');
+        var first = (data.nombre || '').trim().split(' ')[0];
+        done.querySelector('.done-h').textContent = '¡Listo' + (first ? ', ' + first : '') + '!';
+        done.querySelector('.done-p').textContent = c.open
+          ? 'Recibimos tu inscripción a ' + c.title + '. Te escribimos por WhatsApp en menos de 24 h para confirmar fecha, horario, valor y tu cupo.'
+          : 'Quedaste en la lista de espera de ' + c.title + '. Te avisamos primero cuando abran las inscripciones.';
+        done.querySelector('.done-wa').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent('Hola, soy ' + (data.nombre || '') + '. Acabo de inscribirme en ' + c.title);
+        form.hidden = true;
+        var head = card.querySelector('.fcard-h'); if (head) head.hidden = true;
+        done.hidden = false;
+        card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        track('generate_lead', 'Lead', { form: 'inscripcion', curso: slug, tipo: data.tipo, pagina: location.pathname });
+      }).catch(function () {
+        err.textContent = 'No pudimos enviar el formulario. Escríbenos por WhatsApp al +56 9 5117 9298 o a osvaldo.hernandez.o@gmail.com.';
+        err.hidden = false;
+        btn.disabled = false; btn.textContent = label;
+      });
     });
   });
 })();
