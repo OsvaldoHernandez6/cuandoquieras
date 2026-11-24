@@ -1,161 +1,150 @@
 (function () {
   'use strict';
 
+  var COURSES = {
+    'meta-ads': { n: '01', title: 'Meta Ads', color: 'green', open: true },
+    'estrategia-de-contenidos': { n: '02', title: 'Estrategia de contenidos', color: 'coral', open: false },
+    'google-analytics': { n: '03', title: 'Google Analytics 4', color: 'sun', open: false },
+    'google-tag-manager': { n: '04', title: 'Google Tag Manager con Claude', color: 'lila', open: false }
+  };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ---------- Medición: GTM (dataLayer) + Meta Pixel ---------- */
   function track(gaEvent, fbEvent, params) {
     try { window.dataLayer = window.dataLayer || []; window.dataLayer.push(Object.assign({ event: gaEvent }, params || {})); } catch (e) {}
     try { if (window.fbq && fbEvent) window.fbq('track', fbEvent, params || {}); } catch (e) {}
   }
+  var mainCurso = document.querySelector('main[data-curso]');
+  var pageCurso = mainCurso ? mainCurso.getAttribute('data-curso') : '';
+  if (pageCurso) track('view_curso', 'ViewContent', { curso: pageCurso });
+
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a');
     if (!a) return;
     var href = a.getAttribute('href') || '';
-    if (href.indexOf('wa.me') > -1) track('whatsapp_click', 'Contact', { ubicacion: 'boton_flotante' });
-    else if (href.indexOf('ejemplo-ecosistema') > -1) track('ver_ejemplo', null, { herramienta: 'monitor' });
-    else if (href.indexOf('radarejemplo') > -1) track('ver_ejemplo', null, { herramienta: 'radar' });
+    if (href.indexOf('wa.me') > -1) track('whatsapp_click', 'Contact', { ubicacion: a.getAttribute('data-ubicacion') || 'otro', curso: pageCurso });
+    else if (href.indexOf('/inscripcion') === 0) track('click_inscribirme', null, { ubicacion: a.getAttribute('data-cta') || 'otro', curso: pageCurso });
+    else if (a.hasAttribute('data-curso')) track('click_curso', null, { curso: a.getAttribute('data-curso') });
   });
 
-  /* ---------- Menú hamburguesa ---------- */
-  var menu = document.getElementById('cq-menu');
-  function setMenu(open) {
-    if (!menu) return;
-    menu.classList.toggle('open', open);
-    document.body.classList.toggle('menu-open', open);
-    document.querySelectorAll('[data-menu-toggle]').forEach(function (b) {
-      b.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
+  /* ---------- WhatsApp flotante: se muestra al pasar el hero ---------- */
+  var wa = document.querySelector('.wa');
+  var heroEl = document.querySelector('.hero, .lhero');
+  if (wa && heroEl) {
+    var onScroll = function () {
+      var limit = heroEl.offsetTop + heroEl.offsetHeight - window.innerHeight * 0.4;
+      wa.classList.toggle('off', window.scrollY < limit);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
   }
-  document.querySelectorAll('[data-menu-toggle]').forEach(function (b) {
-    b.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
-  });
-  document.querySelectorAll('[data-menu-close]').forEach(function (a) {
-    a.addEventListener('click', function () { setMenu(false); });
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && menu && menu.classList.contains('open')) setMenu(false);
-  });
 
-  /* ---------- Chat animado del hero ---------- */
-  var chat = document.getElementById('cq-chat');
-  var status = document.getElementById('cq-status');
-  var lines = [
-    { me: true, text: '¿Me pueden mandar el reporte?' },
-    { me: false, text: 'Ya lo tienes en vivo, cuando quieras.' },
-    { me: true, text: '¿Y si quiero cambiar la campaña?' },
-    { me: false, text: 'La revisamos hoy mismo.' },
-    { me: true, text: '¿Cuándo hablamos?' },
-    { me: false, text: 'Cuando quieras.' }
-  ];
-  var CHECKS = '<svg width="16" height="11" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M1 6.5L4.5 10L11 2" stroke="#00A85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 6.5L10.5 10L17 2" stroke="#00A85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var step = 0, typing = false, hold = 0, typingEl = null;
+  /* ---------- Palabra que rota en el hero ---------- */
+  var rot = document.getElementById('rot');
+  if (rot && !reduce) {
+    var words = [['Meta Ads', '#00E07A'], ['Analytics', '#FFC83D'], ['Tag Manager', '#9B8CFF'], ['contenidos', '#FF6B4A']];
+    var wi = 0;
+    setInterval(function () {
+      wi = (wi + 1) % words.length;
+      rot.style.background = words[wi][1];
+      rot.innerHTML = '<span class="rot-word">' + words[wi][0] + '</span>';
+    }, 2200);
+  }
 
-  function bubble(line) {
-    var d = document.createElement('div');
-    d.className = 'cq-msg';
-    if (line.me) {
-      d.style.cssText = 'align-self:flex-end;max-width:80%;background:#2A2A2C;padding:11px 14px;font-size:15px;line-height:1.4;color:#E4E4DF';
-      d.textContent = line.text;
-    } else {
-      d.style.cssText = 'align-self:flex-start;max-width:80%;background:#F3F3EF;color:#0B0B0C;padding:11px 14px;font-size:15px;line-height:1.4;font-weight:500;display:flex;align-items:center;gap:8px';
-      var t = document.createElement('span');
-      t.textContent = line.text;
-      d.appendChild(t);
-      d.insertAdjacentHTML('beforeend', CHECKS);
-    }
-    return d;
+  /* ---------- Clase en vivo: reloj y chat ---------- */
+  var clock = document.getElementById('live-clock');
+  if (clock && !reduce) {
+    var t = 42 * 60 + 10;
+    setInterval(function () {
+      t++;
+      var h = Math.floor(t / 3600), m = Math.floor(t / 60) % 60, s = t % 60;
+      clock.textContent = [h, m, s].map(function (x) { return (x < 10 ? '0' : '') + x; }).join(':');
+    }, 1000);
   }
-  function showTyping(on) {
-    typing = on;
-    if (status) status.textContent = on ? 'escribiendo…' : 'en línea';
-    if (on && !typingEl) {
-      typingEl = document.createElement('div');
-      typingEl.setAttribute('aria-label', 'escribiendo');
-      typingEl.style.cssText = 'align-self:flex-start;display:flex;gap:5px;background:#F3F3EF;padding:13px 15px';
-      typingEl.innerHTML = '<span class="cq-dot1" style="width:7px;height:7px;border-radius:50%;background:#0B0B0C"></span><span class="cq-dot2" style="width:7px;height:7px;border-radius:50%;background:#0B0B0C"></span><span class="cq-dot3" style="width:7px;height:7px;border-radius:50%;background:#0B0B0C"></span>';
-      chat.appendChild(typingEl);
-    } else if (!on && typingEl) {
-      typingEl.remove();
-      typingEl = null;
-    }
-  }
-  function tick() {
-    if (step >= lines.length) {
-      if (hold >= 3) { chat.innerHTML = ''; typingEl = null; step = 0; hold = 0; showTyping(false); }
-      else hold++;
-      return;
-    }
-    var next = lines[step];
-    if (!next.me && !typing) { showTyping(true); return; }
-    showTyping(false);
-    chat.appendChild(bubble(next));
-    step++;
-  }
+  var chat = document.getElementById('live-chat');
   if (chat) {
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) {
-      lines.forEach(function (l) { chat.appendChild(bubble(l)); });
-    } else {
-      setInterval(tick, 1300);
+    var msgs = [
+      ['Camila', '¿Por qué me subió tanto el CPM?', false],
+      ['Osvaldo', 'Buena. Comparte pantalla y lo vemos en tu cuenta 👀', true],
+      ['Diego', '¡Ahora sí entendí la frecuencia!', false],
+      ['Osvaldo', 'Mañana publicamos la campaña en vivo 🚀', true]
+    ];
+    var mi = 0;
+    var add = function () {
+      var m = msgs[mi % msgs.length];
+      var d = document.createElement('div');
+      d.className = 'bub' + (m[2] ? ' me' : '');
+      var b = document.createElement('b'); b.textContent = m[0];
+      d.appendChild(b); d.appendChild(document.createTextNode(m[1]));
+      chat.appendChild(d);
+      while (chat.children.length > 2) chat.removeChild(chat.firstChild);
+      mi++;
+    };
+    add(); add();
+    if (!reduce) setInterval(add, 2600);
+  }
+
+  /* ---------- Inscripción ---------- */
+  var form = document.getElementById('ins-form');
+  if (!form) return;
+  var sel = document.getElementById('f-curso');
+  var start = new URLSearchParams(location.search).get('curso');
+  if (start && COURSES[start]) sel.value = start;
+
+  function paint() {
+    var c = COURSES[sel.value];
+    document.body.className = 'c-' + c.color;
+    document.getElementById('ins-n').textContent = c.n;
+    document.getElementById('ins-title').textContent = c.title + '.';
+    document.getElementById('ins-h1').firstChild.textContent = c.open ? 'Inscríbete en ' : 'Lista de espera: ';
+    document.getElementById('ins-p').textContent = c.open
+      ? 'Completa tus datos y te confirmamos por WhatsApp la fecha, el horario, el valor y tu cupo. Respondemos en menos de 24 h.'
+      : 'Estamos preparando la primera edición. Déjanos tus datos y te avisamos primero cuando abran las inscripciones.';
+    document.getElementById('ins-back').href = '/' + sel.value;
+    document.getElementById('f-tipo').value = c.open ? 'Inscripción' : 'Lista de espera';
+    document.getElementById('f-subject').value = (c.open ? 'Inscripción: ' : 'Lista de espera: ') + c.title + ' — cuando quieras';
+    document.getElementById('ins-send').textContent = c.open ? 'Enviar inscripción →' : 'Unirme a la lista →';
+  }
+  sel.addEventListener('change', paint);
+  paint();
+
+  var err = document.getElementById('ins-err');
+  var btn = document.getElementById('ins-send');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (btn.disabled) return;
+    var bad = Array.prototype.filter.call(form.querySelectorAll('[required]'), function (f) { return !f.checkValidity(); });
+    if (bad.length) {
+      err.textContent = 'Revisa tu nombre, WhatsApp y correo para poder contactarte.';
+      err.hidden = false; bad[0].focus(); return;
     }
-  }
-
-  /* ---------- Formulario de contacto (FormSubmit) ---------- */
-  var form = document.getElementById('cq-form');
-  var sent = document.getElementById('cq-sent');
-  var failed = document.getElementById('cq-failed');
-  var btn = document.getElementById('cq-send');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (btn && btn.disabled) return;
-      var data = {};
-      new FormData(form).forEach(function (v, k) { data[k] = v; });
-      if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
-      if (failed) failed.hidden = true;
-      fetch(form.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
-      }).then(function (r) {
-        if (!r.ok) throw new Error('send');
-        form.hidden = true;
-        if (sent) sent.hidden = false;
-        track('generate_lead', 'Lead', { form: 'contacto', tema: data.tema || '' });
-      }).catch(function () {
-        if (failed) failed.hidden = false;
-        if (btn) { btn.disabled = false; btn.textContent = 'Agendar mi reunión →'; }
-      });
+    err.hidden = true;
+    var data = {};
+    new FormData(form).forEach(function (v, k) { data[k] = v; });
+    var c = COURSES[sel.value];
+    data.curso = c.title;
+    var label = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Enviando…';
+    fetch(form.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function (r) {
+      if (!r.ok) throw new Error('send');
+      form.hidden = true;
+      var first = (data.nombre || '').trim().split(' ')[0];
+      document.getElementById('done-h').textContent = '¡Listo' + (first ? ', ' + first : '') + '!';
+      document.getElementById('done-p').textContent = c.open
+        ? 'Recibimos tu inscripción a ' + c.title + '. Te escribimos por WhatsApp en menos de 24 h para confirmar fecha, horario, valor y tu cupo.'
+        : 'Quedaste en la lista de espera de ' + c.title + '. Te avisamos primero cuando abran las inscripciones.';
+      document.getElementById('done-wa').href = 'https://wa.me/56951179298?text=' + encodeURIComponent('Hola, soy ' + (data.nombre || '') + '. Acabo de inscribirme en ' + c.title);
+      document.getElementById('ins-done').hidden = false;
+      track('generate_lead', 'Lead', { form: 'inscripcion', curso: sel.value, tipo: data.tipo });
+    }).catch(function () {
+      err.textContent = 'No pudimos enviar el formulario. Escríbenos por WhatsApp al +56 9 5117 9298 o a osvaldo.hernandez.o@gmail.com.';
+      err.hidden = false;
+      btn.disabled = false; btn.textContent = label;
     });
-  }
-})();
-
-/* ---------- Selector de especialidades ---------- */
-(function () {
-  var SV = [
-    ['Marca', 'Creamos tu marca y cómo se comportará.', 'Estrategia de marca, estrategia de contenidos y social media.'],
-    ['Performance', 'Te ayudamos a cumplir tus objetivos con performance.', 'Pauta full funnel en Meta, Google, TikTok y Pinterest. Diseño de anuncios para generar venta. Métricas con GA4, GTM, Clarity y más.'],
-    ['E-commerce', 'Gestionamos y potenciamos tu tienda online.', 'Creación de tiendas, mailing, descuentos y promociones que mueven la venta.'],
-    ['Auditoría', 'Analizamos tu negocio, tu marca y por dónde puede crecer, con una auditoría.', 'Te ayudamos en tu operación de marketing: revisamos todo lo que haces y encontramos mejoras, oportunidades y hallazgos.'],
-    ['Clases', 'Enseñamos a todos quienes quieran potenciar sus negocios o carreras.', 'Clases a la medida de performance (Meta Ads), marcajes, estrategia y más.']
-  ];
-  var btns = document.querySelectorAll('[data-svc]');
-  var nEl = document.getElementById('cq-svc-n'), nameEl = document.getElementById('cq-svc-name');
-  var bEl = document.getElementById('cq-svc-bajada'), dEl = document.getElementById('cq-svc-detalle');
-  function pick(i) {
-    btns.forEach(function (b, k) {
-      var on = k === i;
-      b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      b.style.opacity = on ? '1' : '0.45';
-      var dot = b.querySelector('.cq-svc-dot');
-      if (dot) dot.style.background = on ? '#00E07A' : 'transparent';
-    });
-    nEl.textContent = '0' + (i + 1);
-    nameEl.textContent = SV[i][0];
-    dEl.textContent = SV[i][2];
-    bEl.textContent = SV[i][1];
-    bEl.classList.remove('cq-msg'); void bEl.offsetWidth; bEl.classList.add('cq-msg');
-  }
-  btns.forEach(function (b) {
-    b.addEventListener('click', function () { pick(+b.getAttribute('data-svc')); });
   });
 })();

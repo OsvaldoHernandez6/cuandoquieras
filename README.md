@@ -1,28 +1,26 @@
-# cuando quieras — sitio web
+# cuando quieras — cursos de marketing digital en vivo
 
-Sitio estático (HTML + CSS + JS, sin dependencias ni build).
+Sitio estático (HTML + CSS + JS, sin build). Se despliega en Vercel con `cleanUrls`, así que cada curso tiene su link directo.
 
-## Estructura
-```
-index.html          → el sitio completo
-main.js             → menú, chat animado del hero y formulario de contacto
-favicon.png         → ícono de la pestaña
-apple-touch-icon.png
-og-image.png        → imagen al compartir el link (1200×630)
-osvaldo.jpg         → tu foto (sección Osvaldo)
-```
+## Páginas
+| Archivo | URL |
+|---|---|
+| `index.html` | cuandoquieras.website |
+| `meta-ads.html` | cuandoquieras.website/meta-ads |
+| `estrategia-de-contenidos.html` | cuandoquieras.website/estrategia-de-contenidos |
+| `google-analytics.html` | cuandoquieras.website/google-analytics |
+| `google-tag-manager.html` | cuandoquieras.website/google-tag-manager |
+| `inscripcion.html` | cuandoquieras.website/inscripcion?curso=meta-ads |
 
-## Publicar en GitHub + Vercel
-1. Crea un repositorio nuevo en GitHub y sube todos estos archivos a la raíz.
-2. En Vercel: **Add New → Project → Import** el repositorio.
-3. Framework Preset: **Other**. Sin comando de build, Output Directory vacío (raíz).
-4. **Deploy**. Luego, en Settings → Domains, conecta tu dominio.
+`styles.css` tiene todo el diseño y `main.js` la medición, las animaciones y el formulario.
 
-## Formulario de contacto
-Usa FormSubmit y envía a osvaldo.hernandez.o@gmail.com.
-- El primer envío desde el sitio publicado manda un correo de activación a esa casilla: hay que confirmarlo una vez.
-- Después de activarlo, FormSubmit entrega un código aleatorio. Reemplaza el correo en el `action` del `<form>` de `index.html` por ese código para no exponer tu email.
+## Formulario de inscripción
+- Usa FormSubmit y llega a osvaldo.hernandez.o@gmail.com. El asunto dice si es "Inscripción" o "Lista de espera" y el curso.
+- El primer envío desde el sitio publicado manda un correo de activación: hay que confirmarlo una vez.
+- `?curso=` preselecciona el curso (meta-ads, estrategia-de-contenidos, google-analytics, google-tag-manager).
 
-## Pendientes
-- Completar en la sección "Cómo trabajamos": [semanal / quincenal] y [menos de X horas].
-- Logos de clientes (hoy son nombres en texto).
+## Abrir inscripciones de un curso nuevo
+En `main.js` cambia `open: false` a `open: true` en ese curso, y actualiza su landing y la tarjeta en `index.html`.
+
+## Eventos (GTM / dataLayer)
+`view_curso`, `click_curso`, `click_inscribirme`, `whatsapp_click`, `generate_lead` (con `curso` y `tipo`). En Meta Pixel: ViewContent, Contact y Lead.
