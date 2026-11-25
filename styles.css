@@ -473,3 +473,11 @@ fieldset.field{border:0;margin:0;padding:0}
 /* Ilustración de marca en la videollamada */
 .p.host .host-art{position:absolute;inset:0;width:100%;height:100%}
 .host-pulse{animation:pulse 1.8s ease-out infinite;transform-origin:50px 50px}
+
+/* Llamado compacto en el hero de cada curso */
+.hcall{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;max-width:560px;padding:18px 18px 18px 20px;background:var(--ink);color:var(--paper);text-decoration:none;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--paper);transition:transform .15s,box-shadow .15s}
+.hcall-t{font-family:var(--display);font-weight:600;font-size:clamp(19px,1.8vw,23px);letter-spacing:-.03em;line-height:1.15}
+.hcall-arr{width:48px;height:48px;border-radius:50%;background:var(--c);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:20px;animation:nudge 1.6s ease-in-out infinite}
+@media (hover:hover){.hcall:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--paper)}}
+.hcall:active{transform:translate(2px,2px)}
+@media (max-width:600px){.hcall{padding:16px;gap:12px}.hcall-t{font-size:18px}.hcall-arr{width:42px;height:42px}}
