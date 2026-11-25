@@ -5,13 +5,13 @@ Sitio estático (HTML + CSS + JS, sin build). Se despliega en Vercel con `cleanU
 ## Páginas
 | Archivo | URL |
 |---|---|
-| `index.html` | cuandoquieras.website |
-| `meta-ads.html` | cuandoquieras.website/meta-ads |
-| `estrategia-de-contenidos.html` | cuandoquieras.website/estrategia-de-contenidos |
-| `google-analytics.html` | cuandoquieras.website/google-analytics |
-| `google-tag-manager.html` | cuandoquieras.website/google-tag-manager |
-| `inscripcion.html` | cuandoquieras.website/inscripcion?curso=meta-ads |
-| `privacidad.html` | cuandoquieras.website/privacidad (link para formularios de Meta) |
+| `index.html` | cuandoquieras.cl |
+| `meta-ads.html` | cuandoquieras.cl/meta-ads |
+| `estrategia-de-contenidos.html` | cuandoquieras.cl/estrategia-de-contenidos |
+| `google-analytics.html` | cuandoquieras.cl/google-analytics |
+| `google-tag-manager.html` | cuandoquieras.cl/google-tag-manager |
+| `inscripcion.html` | cuandoquieras.cl/inscripcion?curso=meta-ads |
+| `privacidad.html` | cuandoquieras.cl/privacidad (link para formularios de Meta) |
 
 `styles.css` tiene todo el diseño y `main.js` la medición, las animaciones y el formulario.
 
