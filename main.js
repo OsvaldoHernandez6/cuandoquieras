@@ -82,6 +82,17 @@
     }, 3000);
   }
 
+  /* ---------- Preventa: cuenta regresiva y vencimiento ---------- */
+  document.querySelectorAll('[data-until]').forEach(function (el) {
+    var until = new Date(el.getAttribute('data-until'));
+    if (isNaN(until)) return;
+    var left = until - new Date();
+    if (left <= 0) { el.hidden = true; return; }
+    var days = Math.ceil(left / 86400000);
+    var out = el.querySelector('[data-countdown]');
+    if (out) out.textContent = days === 1 ? 'Último día de preventa' : 'Quedan ' + days + ' días de preventa';
+  });
+
   /* ---------- Formularios de inscripción ---------- */
   var startCurso = new URLSearchParams(location.search).get('curso');
 

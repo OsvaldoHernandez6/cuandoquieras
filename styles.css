@@ -374,3 +374,74 @@ fieldset.field{border:0;margin:0;padding:0}
   html{scroll-behavior:auto}
 }
 .in{min-height:46px}
+
+/* ================= Fecha, CTA destacado, precio ================= */
+.cal{flex-shrink:0;width:58px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);display:flex;flex-direction:column;align-items:center;line-height:1}
+.cal small{order:-1;width:100%;text-align:center;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;letter-spacing:.08em;padding:4px 0}
+.cal b{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:-.05em;padding:5px 0 6px}
+.cal.big{width:72px}
+.cal.big b{font-size:36px}
+
+/* Botón destacado Meta Ads en el hero */
+.next-cta{display:inline-flex;align-items:center;gap:14px;min-height:64px;padding:8px 16px 8px 8px;background:var(--green);color:var(--ink);text-decoration:none;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.next-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.next-txt small{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.next-txt small .dot{width:7px;height:7px}
+.next-txt b{font-family:var(--display);font-size:20px;letter-spacing:-.03em;line-height:1.05}
+.next-arr{margin-left:auto;width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:18px;transition:transform .2s}
+@media (hover:hover){.next-cta:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}.next-cta:hover .next-arr{transform:rotate(-45deg)}}
+.next-cta:active{transform:translate(2px,2px)}
+
+/* Tarjeta destacada: fecha y botón */
+.when{display:flex;align-items:center;gap:14px}
+.when > span:last-child{display:flex;flex-direction:column;gap:2px}
+.when small{font-family:var(--mono);font-size:12px}
+.when b{font-family:var(--display);font-size:22px;letter-spacing:-.03em}
+.feat-cta{width:100%;min-height:60px;font-size:18px;box-shadow:6px 6px 0 var(--paper)}
+@media (hover:hover){.course.feat:hover .feat-cta{box-shadow:8px 8px 0 var(--paper)}}
+
+/* Landing: próximo curso + dudas */
+.next-box{display:flex;flex-direction:column;border:2px solid var(--ink);background:var(--paper);max-width:560px;box-shadow:6px 6px 0 var(--ink)}
+.next-row{display:flex;align-items:center;gap:16px;padding:14px 16px;border-bottom:2px solid var(--ink)}
+.next-row p{margin:0;display:flex;flex-direction:column;gap:2px}
+.next-row small{font-family:var(--mono);font-size:12px}
+.next-row b{font-family:var(--display);font-size:clamp(24px,2.4vw,30px);letter-spacing:-.04em;line-height:1}
+.ask{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 14px;min-height:56px;padding:10px 16px;text-decoration:none;color:var(--ink);font-size:15px;transition:background .15s}
+.ask b{display:inline-flex;align-items:center;gap:8px;font-size:16px;white-space:nowrap;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.ask b svg{width:18px;height:18px}
+@media (hover:hover){.ask:hover{background:var(--green)}}
+
+/* Precio */
+.price{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);border:2px solid var(--ink);box-shadow:10px 10px 0 var(--c)}
+.price-main{padding:28px 32px;display:flex;flex-direction:column;gap:6px;border-right:2px solid var(--ink);background:#fff}
+.price-row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid #D7D7D1}
+.price-row s{font-family:var(--display);font-size:26px;letter-spacing:-.03em;color:#8E8E8A;text-decoration-thickness:2px}
+.price-row.now b{font-family:var(--display);font-weight:700;font-size:clamp(48px,5.4vw,76px);letter-spacing:-.06em;line-height:.9}
+.price-row.now{border-bottom:0}
+.early{margin-top:14px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 16px;align-items:center;padding:16px 18px;background:var(--sun);border:2px solid var(--ink)}
+.early-tag{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:var(--ink);color:var(--paper);padding:5px 8px;align-self:start}
+.early div{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px}
+.early div span{font-weight:600;font-size:16px}
+.early div b{font-family:var(--display);font-weight:700;font-size:clamp(34px,3.4vw,46px);letter-spacing:-.05em;line-height:1}
+.early small{grid-column:1/-1;font-family:var(--mono);font-size:12px}
+.early small:empty{display:none}
+.price-side{padding:28px 32px;display:flex;flex-direction:column;gap:16px;justify-content:center;background:var(--paper)}
+.pays{display:flex;flex-wrap:wrap;gap:8px}
+.pays span{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:2px solid var(--ink);font-weight:600;font-size:15px;background:#fff}
+@media (max-width:860px){.price{grid-template-columns:1fr}.price-main{border-right:0;border-bottom:2px solid var(--ink)}}
+
+@media (max-width:600px){
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .next-cta{width:100%}
+  .when b{font-size:19px}
+  .feat-cta{font-size:16px;min-height:56px}
+  .next-row{padding:12px 14px}
+  .cal.big{width:62px}
+  .cal.big b{font-size:30px}
+  .ask{padding:10px 14px;font-size:14.5px}
+  .price{box-shadow:6px 6px 0 var(--c)}
+  .price-main,.price-side{padding:20px 18px}
+  .price-row s{font-size:22px}
+  .early{grid-template-columns:1fr;padding:14px}
+}
+@media (max-width:400px){.ctrl:nth-child(2),.ctrl:nth-child(3){display:none}.toast{max-width:72%}}
