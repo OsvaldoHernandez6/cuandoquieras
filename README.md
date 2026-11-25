@@ -11,6 +11,7 @@ Sitio estático (HTML + CSS + JS, sin build). Se despliega en Vercel con `cleanU
 | `google-analytics.html` | cuandoquieras.website/google-analytics |
 | `google-tag-manager.html` | cuandoquieras.website/google-tag-manager |
 | `inscripcion.html` | cuandoquieras.website/inscripcion?curso=meta-ads |
+| `privacidad.html` | cuandoquieras.website/privacidad (link para formularios de Meta) |
 
 `styles.css` tiene todo el diseño y `main.js` la medición, las animaciones y el formulario.
 
