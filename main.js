@@ -44,8 +44,24 @@
   /* ---------- Palabra que rota en el hero ---------- */
   var rot = document.getElementById('rot');
   if (rot && !reduce) {
-    var words = [['Meta Ads', '#00E07A'], ['Analytics', '#FFC83D'], ['Tag Manager', '#9B8CFF'], ['contenidos', '#FF6B4A']];
+    var words = [['Meta Ads', '#00E07A'], ['Google Analytics', '#FFC83D'], ['Google Tag Manager', '#9B8CFF'], ['creación de contenidos', '#FF6B4A']];
     var wi = 0;
+    /* Reserva el alto de la palabra más larga para que el titular no salte */
+    var h1 = rot.closest('h1');
+    var fitHeight = function () {
+      if (!h1) return;
+      h1.style.minHeight = '';
+      var keep = rot.innerHTML, max = 0;
+      words.forEach(function (w) {
+        rot.innerHTML = '<span>' + w[0] + '</span>';
+        max = Math.max(max, h1.getBoundingClientRect().height);
+      });
+      rot.innerHTML = keep;
+      h1.style.minHeight = Math.ceil(max) + 'px';
+    };
+    fitHeight();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHeight);
+    window.addEventListener('resize', fitHeight);
     setInterval(function () {
       wi = (wi + 1) % words.length;
       rot.style.background = words[wi][1];
