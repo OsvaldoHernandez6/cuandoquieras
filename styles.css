@@ -512,3 +512,20 @@ fieldset.field{border:0;margin:0;padding:0}
 .form-end small a{display:inline}
 @media (max-width:900px){.legal{grid-template-columns:1fr;gap:32px;padding-top:40px}.legal-toc{position:static}}
 @media (max-width:600px){.legal-hero .wrap{padding-top:40px;padding-bottom:44px}.legal-contact{padding:22px 18px;box-shadow:6px 6px 0 var(--green)}.legal{padding-bottom:64px}}
+
+/* ---------- Instagram ---------- */
+.igband{background:var(--ink);border-bottom:2px solid var(--ink)}
+.igband .wrap{padding-top:44px;padding-bottom:44px}
+.ig-card{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;padding:26px 30px;background:var(--paper);color:var(--ink);border:2px solid var(--paper);box-shadow:8px 8px 0 var(--lila);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.ig-tile{width:76px;height:76px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;border:2px solid var(--ink);background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%);transform:rotate(-6deg);animation:float 3.2s ease-in-out infinite;--r:-6deg}
+.ig-tile svg{width:42px;height:42px}
+.ig-txt{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ig-kick{color:var(--muted);text-transform:uppercase}
+.ig-h{font-family:var(--display);font-weight:600;font-size:clamp(24px,3vw,38px);letter-spacing:-.045em;line-height:1.05}
+.ig-handle{background:var(--green);padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ig-btn{pointer-events:none}
+@media (hover:hover){.ig-card:hover{transform:translate(-3px,-3px);box-shadow:11px 11px 0 var(--lila)}}
+@media (max-width:760px){.ig-card{grid-template-columns:auto 1fr;gap:18px 18px;padding:22px}.ig-tile{width:60px;height:60px}.ig-tile svg{width:32px;height:32px}.ig-btn{grid-column:1/-1;width:100%}}
+@media (prefers-reduced-motion:reduce){.ig-tile{animation:none}}
+.foot-ig{display:inline-flex;align-items:center;gap:6px}
+.foot-ig svg{width:14px;height:14px}

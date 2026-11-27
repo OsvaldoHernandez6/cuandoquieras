@@ -24,6 +24,7 @@
     if (!a) return;
     var href = a.getAttribute('href') || '';
     if (href.indexOf('wa.me') > -1) track('whatsapp_click', 'Contact', { ubicacion: a.getAttribute('data-ubicacion') || 'otro', curso: pageCurso });
+    else if (href.indexOf('instagram.com') > -1) track('instagram_click', null, { ubicacion: a.getAttribute('data-ubicacion') || 'otro', curso: pageCurso });
     else if (href === '#inscribete' || href.indexOf('/inscripcion') === 0) track('click_inscribirme', null, { ubicacion: a.getAttribute('data-cta') || 'otro', curso: pageCurso });
     else if (a.hasAttribute('data-curso')) track('click_curso', null, { curso: a.getAttribute('data-curso') });
   });
